@@ -1,9 +1,11 @@
-package com.lhj8390.dashboard.model.dto;
+package com.lhj8390.dashboard.model.dto.product;
 
+import com.lhj8390.dashboard.model.ProductCategory;
 import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @NoArgsConstructor
@@ -19,6 +21,6 @@ public class ProductSaveRequestDTO {
     private Integer amount;
     @Min(value = 1)
     private Integer price;
-    @NotBlank
-    private String category;
+    @NotNull
+    private ProductCategory category;
 }

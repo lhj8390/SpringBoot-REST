@@ -1,12 +1,8 @@
 package com.lhj8390.dashboard.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.util.Objects;
 
 @Getter
 @Builder
@@ -28,5 +24,13 @@ public class Product {
 
     private Integer price;
 
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
+
+    public void update(String name, Integer amount, Integer price, ProductCategory category) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.category = category;
+    }
 }

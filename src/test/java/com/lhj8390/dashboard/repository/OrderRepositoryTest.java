@@ -3,15 +3,13 @@ package com.lhj8390.dashboard.repository;
 import com.lhj8390.dashboard.model.Order;
 import com.lhj8390.dashboard.model.OrderType;
 import com.lhj8390.dashboard.model.Product;
-import javafx.scene.input.DataFormat;
-import org.junit.jupiter.api.BeforeAll;
+import com.lhj8390.dashboard.model.ProductCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Date;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +23,7 @@ public class OrderRepositoryTest {
     @BeforeEach
     public void setup() {
          order = Order.builder()
-                .product(new Product(1L, "test", "pic", 1, 1000, "카테고리"))
+                .product(new Product(1L, "test", "pic", 1, 1000, ProductCategory.ELECTRONIC))
                 .orderDt(new Date())
                 .amount(1)
                 .price(1000)

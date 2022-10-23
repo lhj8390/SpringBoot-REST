@@ -1,14 +1,10 @@
 package com.lhj8390.dashboard.mapper;
 
 import com.lhj8390.dashboard.model.Order;
-import com.lhj8390.dashboard.model.Product;
-import com.lhj8390.dashboard.model.dto.OrderListResponseDTO;
-import com.lhj8390.dashboard.model.dto.OrderSaveRequestDTO;
-import com.lhj8390.dashboard.model.dto.ProductListResponseDTO;
-import com.lhj8390.dashboard.model.dto.ProductSaveRequestDTO;
+import com.lhj8390.dashboard.model.dto.order.OrderListResponseDTO;
+import com.lhj8390.dashboard.model.dto.order.OrderSaveRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 

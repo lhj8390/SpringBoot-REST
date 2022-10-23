@@ -4,9 +4,9 @@ package com.lhj8390.dashboard.service;
 import com.lhj8390.dashboard.model.Order;
 import com.lhj8390.dashboard.model.OrderType;
 import com.lhj8390.dashboard.model.Product;
-import com.lhj8390.dashboard.model.dto.OrderListResponseDTO;
+import com.lhj8390.dashboard.model.ProductCategory;
+import com.lhj8390.dashboard.model.dto.order.OrderListResponseDTO;
 import com.lhj8390.dashboard.repository.OrderRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +36,7 @@ public class OrderServiceTest {
     @BeforeEach
     public void setup() {
         order = Order.builder()
-                .product(new Product(1L, "test", "pic", 1, 1000, "카테고리"))
+                .product(new Product(1L, "test", "pic", 1, 1000, ProductCategory.ELECTRONIC))
                 .orderDt(new Date())
                 .amount(1)
                 .price(1000)

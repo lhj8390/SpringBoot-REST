@@ -1,14 +1,13 @@
 package com.lhj8390.dashboard.mapper;
 
 import com.lhj8390.dashboard.model.Product;
-import com.lhj8390.dashboard.model.dto.ProductSaveRequestDTO;
-import com.lhj8390.dashboard.repository.ProductRepository;
+import com.lhj8390.dashboard.model.ProductCategory;
+import com.lhj8390.dashboard.model.dto.product.ProductSaveRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +24,7 @@ public class ProductMapperTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category("category")
+                .category(ProductCategory.ELECTRONIC)
                 .build();
 
         Product product = productMapper.toEntity(dto);
@@ -44,7 +43,7 @@ public class ProductMapperTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category("category")
+                .category(ProductCategory.ELECTRONIC)
                 .build();
 
         ProductSaveRequestDTO dto = productMapper.toSaveDto(product);

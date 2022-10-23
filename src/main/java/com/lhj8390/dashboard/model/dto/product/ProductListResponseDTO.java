@@ -1,4 +1,4 @@
-package com.lhj8390.dashboard.model.dto;
+package com.lhj8390.dashboard.model.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
