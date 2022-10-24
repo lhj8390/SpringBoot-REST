@@ -11,17 +11,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class OrderSaveRequestDTO {
-
-    @NotNull
-    private Long productId;
-
-    @NotNull
-    @EnumPattern(enumClass = OrderType.class, name = "OrderType")
-    private String state;
+public class OrderUpdateRequestDTO {
 
     @NotNull
     @Min(value = 1)
@@ -30,4 +23,8 @@ public class OrderSaveRequestDTO {
     @NotNull
     @Min(value = 1)
     private Integer price;
+
+    @NotNull
+    @EnumPattern(enumClass = OrderType.class, name = "OrderType")
+    private String orderType;
 }

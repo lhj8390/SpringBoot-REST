@@ -24,7 +24,7 @@ public class ProductMapperTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC)
+                .category(ProductCategory.ELECTRONIC.getValue())
                 .build();
 
         Product product = productMapper.toEntity(dto);

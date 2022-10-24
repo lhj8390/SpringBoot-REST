@@ -13,7 +13,8 @@ public interface OrderMapper {
 
     @Mapping(target = "id", ignore = true)
     Order toEntity(OrderSaveRequestDTO requestDTO);
-    OrderSaveRequestDTO toSaveDto(Order order);
+
+
     List<OrderListResponseDTO> toListDto(List<Order> orderList);
 
 }

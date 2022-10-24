@@ -16,3 +16,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    defer-datasource-initialization: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  sql:
+    init:
+      data-locations: classpath:data.sql
+      mode: always

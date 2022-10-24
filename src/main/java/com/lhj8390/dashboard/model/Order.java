@@ -31,4 +31,10 @@ public class Order {
 
     @CreationTimestamp
     private Date orderDt;
+
+    public void update(String state, Integer amount, Integer price) {
+        this.state = OrderType.valueOf(state);
+        this.amount = amount;
+        this.price = price;
+    }
 }

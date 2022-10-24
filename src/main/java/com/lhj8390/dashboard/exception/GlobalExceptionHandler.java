@@ -25,6 +25,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ApiResponse.toResponse
                 (HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류로 인해 실패하였습니다.", exception.getMessage());
     }
+
+    @ExceptionHandler(value = NoItemException.class)
+    public ResponseEntity<Object> noItemExceptionHandler(NoItemException exception) {
+        log.error("throw NoItemException : {}", exception.getMessage());
+        return ApiResponse.toResponse
+                (HttpStatus.BAD_REQUEST, "데이터를 확인해주세요.", exception.getMessage());
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {

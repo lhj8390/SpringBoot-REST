@@ -2,10 +2,11 @@ package com.lhj8390.dashboard.controller;
 
 
 import com.google.gson.Gson;
+import com.lhj8390.dashboard.model.OrderType;
 import com.lhj8390.dashboard.model.ProductCategory;
-import com.lhj8390.dashboard.model.dto.product.ProductSaveRequestDTO;
-import com.lhj8390.dashboard.model.dto.product.ProductUpdateRequestDTO;
-import com.lhj8390.dashboard.service.ProductService;
+import com.lhj8390.dashboard.model.dto.order.OrderSaveRequestDTO;
+import com.lhj8390.dashboard.model.dto.order.OrderUpdateRequestDTO;
+import com.lhj8390.dashboard.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,13 +30,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductControllerTest {
+public class OrderControllerTest {
 
     @InjectMocks
-    private ProductController productController;
+    private OrderController orderController;
 
     @Mock
-    private ProductService productService;
+    private OrderService orderService;
 
     private MockMvc mockMvc;
     private Gson gson;
@@ -43,21 +44,21 @@ public class ProductControllerTest {
     @BeforeEach
     public void setup() {
         gson = new Gson();
-        mockMvc = MockMvcBuilders.standaloneSetup(productController)
+        mockMvc = MockMvcBuilders.standaloneSetup(orderController)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
                 .build();
     }
 
     @Test
     public void mockMvc_is_not_null() {
-        assertThat(productController).isNotNull();
+        assertThat(orderController).isNotNull();
         assertThat(mockMvc).isNotNull();
     }
 
     @Test
     @DisplayName("전체 리스트 조회")
-    public void get_product_list() throws Exception {
-        final String url = "/api/product/";
+    public void get_order_list() throws Exception {
+        final String url = "/api/order/";
 
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.get(url)
@@ -67,21 +68,9 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("특정 상품 조회")
-    public void get_product_one() throws Exception {
-        final String url = "/api/product/1";
-
-        final ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.get(url)
-        );
-
-        resultActions.andExpect(status().isOk());
-    }
-
-    @Test
-    @DisplayName("상품 등록")
-    public void create_product() throws Exception {
-        final String url = "/api/product/";
+    @DisplayName("주문 추가")
+    public void create_order() throws Exception {
+        final String url = "/api/order/";
 
         System.out.println(gson.toJson(saveRequestDTO()));
 
@@ -96,9 +85,9 @@ public class ProductControllerTest {
 
     @ParameterizedTest
     @MethodSource("invalidSaveParameter")
-    @DisplayName("상품 등록 시 정보 누락")
-    public void create_product_invalid(ProductSaveRequestDTO saveRequestDTO) throws Exception {
-        final String url = "/api/product/";
+    @DisplayName("주문 등록 시 정보 누락")
+    public void create_order_invalid(OrderSaveRequestDTO saveRequestDTO) throws Exception {
+        final String url = "/api/order/";
 
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.post(url)
@@ -110,9 +99,9 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("특정 상품 수정")
-    public void update_product() throws Exception {
-        final String url = "/api/product/1";
+    @DisplayName("주문 수정")
+    public void update_order() throws Exception {
+        final String url = "/api/order/1";
 
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.put(url)
@@ -125,9 +114,9 @@ public class ProductControllerTest {
 
     @ParameterizedTest
     @MethodSource("invalidUpdateParameter")
-    @DisplayName("특정 상품 수정 시 정보 누락")
-    public void update_product(ProductUpdateRequestDTO updateRequestDTO) throws Exception {
-        final String url = "/api/product/1";
+    @DisplayName("주문 수정 시 정보 누락")
+    public void update_order(OrderUpdateRequestDTO updateRequestDTO) throws Exception {
+        final String url = "/api/order/1";
 
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.put(url)
@@ -139,9 +128,9 @@ public class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("특정 상품 삭제")
-    public void delete_product() throws Exception {
-        final String url = "/api/product/1";
+    @DisplayName("주문 삭제")
+    public void delete_order() throws Exception {
+        final String url = "/api/order/1";
 
         final ResultActions resultActions = mockMvc.perform(
                 MockMvcRequestBuilders.delete(url)
@@ -150,38 +139,36 @@ public class ProductControllerTest {
         resultActions.andExpect(status().isNoContent());
     }
 
-    private ProductSaveRequestDTO saveRequestDTO() {
-        return ProductSaveRequestDTO.builder()
-                .name("product")
-                .price(1999)
+    private OrderSaveRequestDTO saveRequestDTO() {
+        return OrderSaveRequestDTO.builder()
+                .state(OrderType.PROCESSING.getValue())
+                .productId(1L)
+                .price(1000)
                 .amount(1)
-                .thumnail("thum")
-                .category(ProductCategory.ELECTRONIC.getValue())
                 .build();
     }
 
-    private ProductUpdateRequestDTO updateRequestDTO() {
-        return ProductUpdateRequestDTO.builder()
-                .name("product")
-                .price(1999)
+    private OrderUpdateRequestDTO updateRequestDTO() {
+        return OrderUpdateRequestDTO.builder()
+                .price(100)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .orderType(OrderType.REJECTED.getValue())
                 .build();
     }
 
     private static Stream<Arguments> invalidSaveParameter() {
         return Stream.of(
-            Arguments.of(new ProductSaveRequestDTO("name", "thum", 0, 1, ProductCategory.ELECTRONIC.getValue())),
-            Arguments.of(new ProductSaveRequestDTO("", "thum", 1, 1, ProductCategory.ELECTRONIC.getValue())),
-            Arguments.of(new ProductSaveRequestDTO("", "thum", 0, 0, null))
+            Arguments.of(new OrderSaveRequestDTO(1L, "invalid", 0, 1)),
+            Arguments.of(new OrderSaveRequestDTO(-1L, OrderType.PROCESSING.getValue(), 1, 1)),
+            Arguments.of(new OrderSaveRequestDTO(1L, OrderType.REJECTED.getValue(), 1, 0))
         );
     }
 
     private static Stream<Arguments> invalidUpdateParameter() {
         return Stream.of(
-                Arguments.of(new ProductUpdateRequestDTO("name", 0, 1, ProductCategory.ELECTRONIC.getValue())),
-                Arguments.of(new ProductUpdateRequestDTO("name", 4, 1, null)),
-                Arguments.of(new ProductUpdateRequestDTO("", 2, 1, ProductCategory.ELECTRONIC.getValue()))
+                Arguments.of(new OrderUpdateRequestDTO( 0, 1, OrderType.COMPLETED.getValue())),
+                Arguments.of(new OrderUpdateRequestDTO( 4, 1, "invalid")),
+                Arguments.of(new OrderUpdateRequestDTO(2, 0, ProductCategory.ELECTRONIC.getValue()))
         );
     }
 }

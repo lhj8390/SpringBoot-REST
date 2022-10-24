@@ -47,7 +47,7 @@ public class ProductServiceTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC)
+                .category(ProductCategory.ELECTRONIC.getValue())
                 .build();
     }
 
@@ -94,14 +94,14 @@ public class ProductServiceTest {
 
     @Test
     @DisplayName("상품을 수정한다.")
-    public void update_prduct() {
+    public void update_product() {
         Optional<Product> productOptional = Optional.ofNullable(productMapper.toEntity(productSaveRequestDTO));
         doReturn(productOptional).when(productRepository).findById(1L);
         ProductUpdateRequestDTO updateData = ProductUpdateRequestDTO.builder()
                 .name("product2")
                 .amount(2)
                 .price(1000)
-                .category(ProductCategory.ELECTRONIC)
+                .category(ProductCategory.ELECTRONIC.getValue())
                 .build();
         productOptional.ifPresent(product ->
             product.update(updateData.getName(), updateData.getAmount(), updateData.getPrice(), ProductCategory.BOOK)
