@@ -156,7 +156,7 @@ public class ProductControllerTest {
                 .price(1999)
                 .amount(1)
                 .thumnail("thum")
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .category(ProductCategory.ELECTRONIC.name())
                 .build();
     }
 
@@ -165,23 +165,23 @@ public class ProductControllerTest {
                 .name("product")
                 .price(1999)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .category(ProductCategory.ELECTRONIC.name())
                 .build();
     }
 
     private static Stream<Arguments> invalidSaveParameter() {
         return Stream.of(
-            Arguments.of(new ProductSaveRequestDTO("name", "thum", 0, 1, ProductCategory.ELECTRONIC.getValue())),
-            Arguments.of(new ProductSaveRequestDTO("", "thum", 1, 1, ProductCategory.ELECTRONIC.getValue())),
+            Arguments.of(new ProductSaveRequestDTO("name", "thum", 0, 1, ProductCategory.ELECTRONIC.name())),
+            Arguments.of(new ProductSaveRequestDTO("", "thum", 1, 1, ProductCategory.ELECTRONIC.name())),
             Arguments.of(new ProductSaveRequestDTO("", "thum", 0, 0, null))
         );
     }
 
     private static Stream<Arguments> invalidUpdateParameter() {
         return Stream.of(
-                Arguments.of(new ProductUpdateRequestDTO("name", 0, 1, ProductCategory.ELECTRONIC.getValue())),
+                Arguments.of(new ProductUpdateRequestDTO("name", 0, 1, ProductCategory.ELECTRONIC.name())),
                 Arguments.of(new ProductUpdateRequestDTO("name", 4, 1, null)),
-                Arguments.of(new ProductUpdateRequestDTO("", 2, 1, ProductCategory.ELECTRONIC.getValue()))
+                Arguments.of(new ProductUpdateRequestDTO("", 2, 1, ProductCategory.ELECTRONIC.name()))
         );
     }
 }

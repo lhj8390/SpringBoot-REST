@@ -141,7 +141,7 @@ public class OrderControllerTest {
 
     private OrderSaveRequestDTO saveRequestDTO() {
         return OrderSaveRequestDTO.builder()
-                .state(OrderType.PROCESSING.getValue())
+                .state(OrderType.PROCESSING.name())
                 .productId(1L)
                 .price(1000)
                 .amount(1)
@@ -152,23 +152,23 @@ public class OrderControllerTest {
         return OrderUpdateRequestDTO.builder()
                 .price(100)
                 .amount(1)
-                .orderType(OrderType.REJECTED.getValue())
+                .orderType(OrderType.REJECTED.name())
                 .build();
     }
 
     private static Stream<Arguments> invalidSaveParameter() {
         return Stream.of(
             Arguments.of(new OrderSaveRequestDTO(1L, "invalid", 0, 1)),
-            Arguments.of(new OrderSaveRequestDTO(-1L, OrderType.PROCESSING.getValue(), 1, 1)),
-            Arguments.of(new OrderSaveRequestDTO(1L, OrderType.REJECTED.getValue(), 1, 0))
+            Arguments.of(new OrderSaveRequestDTO(null, OrderType.PROCESSING.name(), 1, 1)),
+            Arguments.of(new OrderSaveRequestDTO(1L, OrderType.REJECTED.name(), 1, 0))
         );
     }
 
     private static Stream<Arguments> invalidUpdateParameter() {
         return Stream.of(
-                Arguments.of(new OrderUpdateRequestDTO( 0, 1, OrderType.COMPLETED.getValue())),
+                Arguments.of(new OrderUpdateRequestDTO( 0, 1, OrderType.COMPLETED.name())),
                 Arguments.of(new OrderUpdateRequestDTO( 4, 1, "invalid")),
-                Arguments.of(new OrderUpdateRequestDTO(2, 0, ProductCategory.ELECTRONIC.getValue()))
+                Arguments.of(new OrderUpdateRequestDTO(2, 0, ProductCategory.ELECTRONIC.name()))
         );
     }
 }

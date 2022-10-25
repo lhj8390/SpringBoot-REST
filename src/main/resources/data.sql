@@ -18,3 +18,6 @@ INSERT INTO PRODUCTS(id, amount, category, name, price, thumnail) VALUES
     (9, 53, 'FASHION', 'Sneakers', 79000, 'thum');
 INSERT INTO PRODUCTS(id, amount, category, name, price, thumnail) VALUES
     (10, 8, 'ELECTRONIC', 'SmartWatch', 150000, 'thum');
+
+INSERT INTO USERS(id, username, email, password) VALUES
+    (1, 'test', 'test@test.com', '$2a$10$NpBc.8v9Q.KBN49OxAfcz.ggxF5dqx053weDoD3vgvzvh/R8KrX.e');

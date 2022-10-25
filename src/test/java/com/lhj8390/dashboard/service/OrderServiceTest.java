@@ -54,7 +54,7 @@ public class OrderServiceTest {
         saveRequestDTO = OrderSaveRequestDTO.builder()
                 .amount(2)
                 .price(2000)
-                .state(OrderType.WAIT.getValue())
+                .state(OrderType.WAIT.name())
                 .productId(1L)
                 .build();
     }
@@ -98,11 +98,11 @@ public class OrderServiceTest {
         doReturn(Optional.of(orderMapper.toEntity(saveRequestDTO))).when(orderRepository).findById(1L);
         Order order = orderMapper.toEntity(saveRequestDTO);
         OrderUpdateRequestDTO updateRequestDTO = OrderUpdateRequestDTO.builder()
-                .orderType(OrderType.PROCESSING.getValue())
+                .orderType(OrderType.PROCESSING.name())
                 .amount(2)
                 .price(2000)
                 .build();
-        order.update(OrderType.PROCESSING.getValue(), 2, 2000);
+        order.update(OrderType.PROCESSING.name(), 2, 2000);
         orderService.updateOrder(1L, updateRequestDTO);
 
         assertEquals(orderRepository.findById(1L).get().getState(), order.getState());
@@ -115,7 +115,7 @@ public class OrderServiceTest {
     public void update_order_invalid() {
         doReturn(Optional.empty()).when(orderRepository).findById(1L);
         OrderUpdateRequestDTO updateRequestDTO = OrderUpdateRequestDTO.builder()
-                .orderType(OrderType.PROCESSING.getValue())
+                .orderType(OrderType.PROCESSING.name())
                 .amount(2)
                 .price(2000)
                 .build();

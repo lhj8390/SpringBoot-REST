@@ -25,3 +25,7 @@ spring:
     init:
       data-locations: classpath:data.sql
       mode: always
+
+app:
+  jwtSecret: secret
+  jwtExpiration: 3600000

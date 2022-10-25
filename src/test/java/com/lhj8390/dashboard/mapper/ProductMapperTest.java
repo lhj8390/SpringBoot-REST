@@ -24,7 +24,7 @@ public class ProductMapperTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .category(ProductCategory.ELECTRONIC.name())
                 .build();
 
         Product product = productMapper.toEntity(dto);
@@ -32,7 +32,7 @@ public class ProductMapperTest {
         assertEquals(product.getName(), dto.getName());
         assertEquals(product.getPrice(), dto.getPrice());
         assertEquals(product.getAmount(), dto.getAmount());
-        assertEquals(product.getCategory(), dto.getCategory());
+        assertEquals(product.getCategory().name(), dto.getCategory());
     }
 
     @Test
@@ -50,6 +50,6 @@ public class ProductMapperTest {
         assertEquals(product.getName(), dto.getName());
         assertEquals(product.getPrice(), dto.getPrice());
         assertEquals(product.getAmount(), dto.getAmount());
-        assertEquals(product.getCategory(), dto.getCategory());
+        assertEquals(product.getCategory().name(), dto.getCategory());
     }
 }

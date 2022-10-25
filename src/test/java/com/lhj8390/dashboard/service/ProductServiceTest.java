@@ -47,7 +47,7 @@ public class ProductServiceTest {
                 .thumnail("thumnail")
                 .price(1000)
                 .amount(1)
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .category(ProductCategory.ELECTRONIC.name())
                 .build();
     }
 
@@ -101,7 +101,7 @@ public class ProductServiceTest {
                 .name("product2")
                 .amount(2)
                 .price(1000)
-                .category(ProductCategory.ELECTRONIC.getValue())
+                .category(ProductCategory.ELECTRONIC.name())
                 .build();
         productOptional.ifPresent(product ->
             product.update(updateData.getName(), updateData.getAmount(), updateData.getPrice(), ProductCategory.BOOK)
