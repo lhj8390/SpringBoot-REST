@@ -1,6 +1,5 @@
 package com.lhj8390.dashboard.auth;
 
-import com.sun.security.auth.UserPrincipal;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,19 +18,19 @@ public class JwtTokenProvider {
     private int jwtExpiration;
 
     public String generateToken(Authentication authentication) {
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        String email = (String) authentication.getPrincipal();
 
         Date expiryDate = new Date(new Date().getTime() + jwtExpiration);
 
         return Jwts.builder()
-                .setSubject(userPrincipal.getName())
+                .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
-    public String getUsernameFromJWT(String token) {
+    public String getEmailFromJWT(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)

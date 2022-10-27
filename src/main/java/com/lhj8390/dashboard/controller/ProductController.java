@@ -7,7 +7,7 @@ import com.lhj8390.dashboard.model.dto.product.ProductUpdateRequestDTO;
 import com.lhj8390.dashboard.model.response.ApiResponse;
 import com.lhj8390.dashboard.service.ProductService;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;

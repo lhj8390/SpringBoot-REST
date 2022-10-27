@@ -10,8 +10,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Slf4j
 @AllArgsConstructor
@@ -21,17 +23,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private CustomUserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         String token = getTokenFromRequest(request);
 
-        if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
-            String username = tokenProvider.getUsernameFromJWT(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        try {
+            if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
+                String email = tokenProvider.getEmailFromJWT(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            }
+
+            filterChain.doFilter(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            SecurityContextHolder.clearContext();
         }
+
+
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {

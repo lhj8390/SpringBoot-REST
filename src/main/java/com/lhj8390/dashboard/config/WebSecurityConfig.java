@@ -1,38 +1,49 @@
 package com.lhj8390.dashboard.config;
 
 import com.lhj8390.dashboard.auth.CustomUserDetailsService;
+import com.lhj8390.dashboard.auth.JwtAuthenticationFilter;
+import com.lhj8390.dashboard.auth.JwtTokenProvider;
 import com.lhj8390.dashboard.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WebSecurityConfig implements WebSecurityCustomizer {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+            .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-                .formLogin().disable();
+                .formLogin().disable()
+            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
@@ -51,29 +62,22 @@ public class WebSecurityConfig implements WebSecurityCustomizer {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService());
     }
 
     @Bean
-    public AuthenticationManager authManager
-            (HttpSecurity http, BCryptPasswordEncoder passwordEncoder, CustomUserDetailsService userDetailService)
-            throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailService)
-                .passwordEncoder(passwordEncoder)
-                .and()
-                .build();
+    PasswordEncoder passwordEncoder() {
+        String idForEncode = "bcrypt";
+
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put(idForEncode, new BCryptPasswordEncoder());
+
+        return new DelegatingPasswordEncoder(idForEncode, encoders);
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
+        return authConfiguration.getAuthenticationManager();
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }

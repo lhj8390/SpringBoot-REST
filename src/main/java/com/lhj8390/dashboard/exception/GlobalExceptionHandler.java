@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("throw NoItemException : {}", exception.getMessage());
         return ApiResponse.toResponse
                 (HttpStatus.BAD_REQUEST, "데이터를 확인해주세요.", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = BadCredentialsException.class)
+    public ResponseEntity<Object> badCredentialsException(BadCredentialsException exception) {
+        log.error("throw BadCredentialsException : {}", exception.getMessage());
+        return ApiResponse.toResponse
+                (HttpStatus.UNAUTHORIZED, "비밀번호를 다시 확인해주세요.", exception.getMessage());
     }
 
     @Override

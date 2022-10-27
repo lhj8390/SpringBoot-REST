@@ -6,7 +6,7 @@ import com.lhj8390.dashboard.model.dto.order.OrderUpdateRequestDTO;
 import com.lhj8390.dashboard.model.response.ApiResponse;
 import com.lhj8390.dashboard.service.OrderService;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/order")
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @ApiOperation(value = "주문 리스트 조회", notes = "모든 주문을 조회합니다.", response = OrderListResponseDTO.class)
     @GetMapping("/")
