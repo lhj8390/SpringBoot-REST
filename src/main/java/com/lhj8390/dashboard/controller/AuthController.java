@@ -1,6 +1,7 @@
 package com.lhj8390.dashboard.controller;
 
 import com.lhj8390.dashboard.model.dto.user.AuthResponseDTO;
+import com.lhj8390.dashboard.model.dto.user.JoinRequestDTO;
 import com.lhj8390.dashboard.model.dto.user.LoginRequestDTO;
 import com.lhj8390.dashboard.model.response.ApiResponse;
 import com.lhj8390.dashboard.service.AuthService;
@@ -29,5 +30,12 @@ public class AuthController {
         return ApiResponse.toResponse(HttpStatus.OK, "로그인 성공!", response);
     }
 
+    @PostMapping("/join")
+    public ResponseEntity<?> join(@Valid @RequestBody JoinRequestDTO dto) {
+
+        authService.join(dto);
+
+        return ApiResponse.toResponse(HttpStatus.OK, "회원가입 성공!", null);
+    }
 
 }

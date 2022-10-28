@@ -1,6 +1,5 @@
 package com.lhj8390.dashboard.model.entity;
 
-import com.lhj8390.dashboard.model.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 4, message = "4자 이상 입력해주세요.")
@@ -38,5 +38,13 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    public void setRoles(Role role) {
+        this.roles = new HashSet<>(Collections.singletonList(role));
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }
