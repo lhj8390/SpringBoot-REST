@@ -1,6 +1,6 @@
 package com.lhj8390.dashboard.mapper;
 
-import com.lhj8390.dashboard.model.Product;
+import com.lhj8390.dashboard.model.entity.Product;
 import com.lhj8390.dashboard.model.ProductCategory;
 import com.lhj8390.dashboard.model.dto.product.ProductSaveRequestDTO;
 import org.junit.jupiter.api.DisplayName;

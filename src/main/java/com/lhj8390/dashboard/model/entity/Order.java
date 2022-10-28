@@ -1,5 +1,6 @@
-package com.lhj8390.dashboard.model;
+package com.lhj8390.dashboard.model.entity;
 
+import com.lhj8390.dashboard.model.OrderType;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 

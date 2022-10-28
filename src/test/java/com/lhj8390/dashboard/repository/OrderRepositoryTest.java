@@ -1,8 +1,8 @@
 package com.lhj8390.dashboard.repository;
 
-import com.lhj8390.dashboard.model.Order;
+import com.lhj8390.dashboard.model.entity.Order;
 import com.lhj8390.dashboard.model.OrderType;
-import com.lhj8390.dashboard.model.Product;
+import com.lhj8390.dashboard.model.entity.Product;
 import com.lhj8390.dashboard.model.ProductCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

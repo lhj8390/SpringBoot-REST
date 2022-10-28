@@ -2,7 +2,7 @@ package com.lhj8390.dashboard.service;
 
 import com.lhj8390.dashboard.exception.NoItemException;
 import com.lhj8390.dashboard.mapper.ProductMapper;
-import com.lhj8390.dashboard.model.Product;
+import com.lhj8390.dashboard.model.entity.Product;
 import com.lhj8390.dashboard.model.ProductCategory;
 import com.lhj8390.dashboard.model.dto.product.ProductListResponseDTO;
 import com.lhj8390.dashboard.model.dto.product.ProductResponseDTO;

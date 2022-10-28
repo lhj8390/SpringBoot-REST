@@ -19,5 +19,10 @@ INSERT INTO PRODUCTS(id, amount, category, name, price, thumnail) VALUES
 INSERT INTO PRODUCTS(id, amount, category, name, price, thumnail) VALUES
     (10, 8, 'ELECTRONIC', 'SmartWatch', 150000, 'thum');
 
+INSERT INTO ROLES(name) VALUES ('ROLE_USER');
+INSERT INTO ROLES(name) VALUES ('ROLE_ADMIN');
+
 INSERT INTO USERS(id, username, email, password) VALUES
     (1, 'test', 'test@test.com', '{bcrypt}$2a$10$blG3I2eS34cCEJfNOxYtx.V2U4HPcv1LF4J4t.5tcKZ/eFd71LYw6');
+
+INSERT INTO USER_ROLES(user_id, role_id) VALUES (1, 2);

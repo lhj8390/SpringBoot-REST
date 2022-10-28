@@ -1,5 +1,6 @@
-package com.lhj8390.dashboard.model;
+package com.lhj8390.dashboard.model.entity;
 
+import com.lhj8390.dashboard.model.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +32,11 @@ public class User {
 
     @Size(min = 8, message = "비밀번호 최소 길이는 8자입니다.")
     private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
 }

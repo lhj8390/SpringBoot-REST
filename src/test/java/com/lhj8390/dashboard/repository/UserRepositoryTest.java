@@ -1,6 +1,6 @@
 package com.lhj8390.dashboard.repository;
 
-import com.lhj8390.dashboard.model.User;
+import com.lhj8390.dashboard.model.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

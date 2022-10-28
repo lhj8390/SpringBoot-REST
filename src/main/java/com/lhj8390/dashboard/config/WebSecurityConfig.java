@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,15 +36,22 @@ public class WebSecurityConfig implements WebSecurityCustomizer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
+                .cors().disable()
             .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().hasRole("ADMIN")
             .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .formLogin().disable()
-            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
+            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            // 에러 핸들링
+            .exceptionHandling().authenticationEntryPoint((request, response, authException) ->
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
+            )
+            .accessDeniedHandler((request, response, accessDeniedException) ->
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden")
+            );
 
         return http.build();
     }

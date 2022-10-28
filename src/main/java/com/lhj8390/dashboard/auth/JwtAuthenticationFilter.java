@@ -2,6 +2,7 @@ package com.lhj8390.dashboard.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,23 +29,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = getTokenFromRequest(request);
 
-        try {
-            if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
-                String email = tokenProvider.getEmailFromJWT(token);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
+            String email = tokenProvider.getEmailFromJWT(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-                Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            }
-
-            filterChain.doFilter(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            SecurityContextHolder.clearContext();
         }
 
-
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {

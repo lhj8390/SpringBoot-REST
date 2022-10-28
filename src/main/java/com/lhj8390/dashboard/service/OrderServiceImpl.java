@@ -2,8 +2,8 @@ package com.lhj8390.dashboard.service;
 
 import com.lhj8390.dashboard.exception.NoItemException;
 import com.lhj8390.dashboard.mapper.OrderMapper;
-import com.lhj8390.dashboard.model.Order;
-import com.lhj8390.dashboard.model.Product;
+import com.lhj8390.dashboard.model.entity.Order;
+import com.lhj8390.dashboard.model.entity.Product;
 import com.lhj8390.dashboard.model.dto.order.OrderListResponseDTO;
 import com.lhj8390.dashboard.model.dto.order.OrderSaveRequestDTO;
 import com.lhj8390.dashboard.model.dto.order.OrderUpdateRequestDTO;

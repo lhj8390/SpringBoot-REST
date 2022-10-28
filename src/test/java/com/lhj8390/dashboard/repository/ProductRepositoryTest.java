@@ -1,15 +1,11 @@
 package com.lhj8390.dashboard.repository;
 
-import com.lhj8390.dashboard.model.Order;
-import com.lhj8390.dashboard.model.OrderType;
-import com.lhj8390.dashboard.model.Product;
+import com.lhj8390.dashboard.model.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
