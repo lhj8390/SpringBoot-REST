@@ -12,7 +12,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { token, error } = useSelector(state => state.auth);
-    const [cookies, setCookie] = useCookies(['token']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
     const onFinish = (values) => {
         dispatch(loginAsync(values));
@@ -34,6 +34,8 @@ const Login = () => {
             message.success('로그인 성공!');
             setCookie('token', token);
             navigate('/');
+        } else {
+            removeCookie('token');
         }
     }, [token]);
 

@@ -1,9 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
 import apiInstance from '../api/apiInstance';
-import { LOGIN_FAILED, LOGIN_SUCCESS } from '../constants/actionTypes';
+import { LOGIN, LOGIN_CHECK, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT } from '../constants/actionTypes';
 
 const loginSuccess = createAction(LOGIN_SUCCESS);
 const loginFailed = createAction(LOGIN_FAILED);
+const logout = createAction(LOGOUT);
+const loginCheck = createAction(LOGIN_CHECK);
 
 export const loginAsync = (loginData) => {
 
@@ -17,3 +19,11 @@ export const loginAsync = (loginData) => {
         });
 	  };
 };
+
+export const logoutAsync = () => {
+    return logout();
+}
+
+export const loginCheckAsync = (token) => {
+    return loginCheck(token);
+}

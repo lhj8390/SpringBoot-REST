@@ -10,6 +10,7 @@ const HeaderMenu = () => {
     const navigate = useNavigate();
     const { isAuthenticated } = useSelector(state => state.auth);
     const [path, setPath] = useState('home');
+
     useEffect(() => {
 
         if (location.pathname == '/') {
@@ -28,6 +29,10 @@ const HeaderMenu = () => {
         navigate('/login');
     }
 
+    const onLogoutClick = () => {
+        navigate('/logout');
+    }
+
     return (
         <Header style={{ background: '#fff'}}>
             <Row justify="end">
@@ -35,13 +40,17 @@ const HeaderMenu = () => {
                 <Col flex='50px'>
                     { isAuthenticated ?
                         <Button
-                            icon={<LogoutOutlined />}>로그아웃
+                            icon={<LogoutOutlined />}
+                            onClick={onLogoutClick}
+                        >
+                            로그아웃
                         </Button>
                     :
                         <Button
                             icon={<LoginOutlined />}
-                            onClick={onLoginClick}>
-                                로그인
+                            onClick={onLoginClick}
+                        >
+                            로그인
                         </Button>
                     }
                 </Col>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "antd/dist/antd.css";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from 'antd';
@@ -7,9 +7,24 @@ import HeaderMenu from './views/common/HeaderMenu';
 import SideMenu from './views/common/SideMenu';
 import Home from './views/Home';
 import Login from './views/auth/login';
+import Logout from './views/auth/logout';
+import { useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { loginCheckAsync } from './actions/auth';
 const { Content, Footer } = Layout;
 
 const App = () => {
+
+	const dispatch = useDispatch();
+	const [ cookies ] = useCookies(['token']);
+
+	useEffect(() => {
+		if (cookies.token != undefined) {
+			dispatch(loginCheckAsync(cookies.token));
+
+		}
+	}, [cookies.token]);
+
 	return (
 		<Layout className="App" style={{ minHeight: '100vh' }}>
 			<SideMenu/>
@@ -20,6 +35,7 @@ const App = () => {
 						<Routes>
 							<Route exact path='/' element={<Home/>}/>
 							<Route exact path='/login' element={<Login/>}/>
+							<Route exact path='/logout' element={<Logout/>}/>
 							<Route exact path='/product' element={<ProductList/>}/>
 						</Routes>
 					</div>
