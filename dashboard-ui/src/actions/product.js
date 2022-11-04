@@ -7,7 +7,7 @@ const getProductListSuccess = createAction(GET_PRODUCT_LIST_SUCCESS);
 
 
 export const getProductListAsync = () => {
-	return async function (dispatch) {
+	return async (dispatch) => {
 		apiInstance().get('/api/product/')
 		.then(response => dispatch(getProductListSuccess(response.data.data.content)));
 	  }

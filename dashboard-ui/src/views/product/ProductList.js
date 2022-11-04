@@ -40,20 +40,18 @@ const productList = () => {
 
     const dispatch = useDispatch();
     const {productList} = useSelector(state => state.product);
-    const [dataSource, setDataSource] = useState([...productList]);
 
     useEffect(() => {
         dispatch(getProductListAsync());
 
     }, [])
 
-    useEffect(() => {
-        setDataSource([...productList]);
-    }, [productList])
-
     return(
         <>
-            <Table columns={columes} dataSource={dataSource}/>
+            <Table
+                columns={columes}
+                rowKey={product => product.id}
+                dataSource={productList}/>
         </>
     );
 };

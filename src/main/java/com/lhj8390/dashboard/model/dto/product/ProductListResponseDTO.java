@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ProductListResponseDTO {
     private Long id;
+    private String name;
     private String thumnail;
     private String category;
     private Integer amount;

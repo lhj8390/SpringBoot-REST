@@ -6,6 +6,7 @@ import ProductList from './views/product/ProductList';
 import HeaderMenu from './views/common/HeaderMenu';
 import SideMenu from './views/common/SideMenu';
 import Home from './views/Home';
+import Login from './views/auth/login';
 const { Content, Footer } = Layout;
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
 					<div style={{ background: '#fff', padding: '24px', minHeight: '60vh' }}>
 						<Routes>
 							<Route exact path='/' element={<Home/>}/>
+							<Route exact path='/login' element={<Login/>}/>
 							<Route exact path='/product' element={<ProductList/>}/>
 						</Routes>
 					</div>
