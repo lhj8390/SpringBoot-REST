@@ -1,11 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
 import apiInstance from '../api/apiInstance';
-import { JOIN_FAILED, JOIN_SUCCESS, LOGIN, LOGIN_CHECK, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT } from '../constants/actionTypes';
+import { JOIN_FAILED, JOIN_SUCCESS, LOGIN_CHECK_FAILED, LOGIN_CHECK_SUCCESS,
+    LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT } from '../constants/actionTypes';
 
 const loginSuccess = createAction(LOGIN_SUCCESS);
 const loginFailed = createAction(LOGIN_FAILED);
 const logout = createAction(LOGOUT);
-const loginCheck = createAction(LOGIN_CHECK);
+const loginCheckSuccess = createAction(LOGIN_CHECK_SUCCESS);
+const loginCheckFailed = createAction(LOGIN_CHECK_FAILED);
 const joinSuccess = createAction(JOIN_SUCCESS);
 const joinFailed = createAction(JOIN_FAILED);
 
@@ -27,7 +29,10 @@ export const logoutAsync = () => {
 }
 
 export const loginCheckAsync = (token) => {
-    return loginCheck(token);
+    if (token != null) {
+        return loginCheckSuccess(token);
+    }
+    return loginCheckFailed();
 }
 
 export const joinAsync = (joinData) => {

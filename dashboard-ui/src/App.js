@@ -20,10 +20,7 @@ const App = () => {
 	const [ cookies ] = useCookies(['token']);
 
 	useEffect(() => {
-		if (cookies.token != undefined) {
-			dispatch(loginCheckAsync(cookies.token));
-
-		}
+		dispatch(loginCheckAsync(cookies.token));
 	}, [cookies.token]);
 
 	return (

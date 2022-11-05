@@ -1,23 +1,23 @@
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (4, 'ELECTRONIC', 'Camera', 135000, 'thum');
+    (4, 'ELECTRONIC', 'Camera', 135000, '/image/camera.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (64, 'ELECTRONIC', 'headphone', 40000, 'thum');
+    (64, 'ELECTRONIC', 'headphone', 40000, '/image/headphone.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (27, 'FASHION', 'Dress', 40000, 'thum');
+    (27, 'FASHION', 'Dress', 40000, '/image/dress.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (129, 'BOOK', 'Fountain Pen', 50000, 'thum');
+    (129, 'BOOK', 'Fountain Pen', 50000, '/image/fountain_pen.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (2, 'ELECTRONIC', 'MacBook', 3500000, 'thum');
+    (2, 'ELECTRONIC', 'MacBook', 3500000, '/image/macbook.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (53, 'FASHION', 'Necklace', 5000, 'thum');
+    (53, 'FASHION', 'Necklace', 5000, '/image/Necklace.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (102, 'ELECTRONIC', 'Mouse', 20000, 'thum');
+    (102, 'ELECTRONIC', 'Mouse', 20000, '/image/Mouse.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (252, 'BOOK', 'Crayon', 4000, 'thum');
+    (252, 'BOOK', 'Crayon', 4000, '/image/crayon.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (53, 'FASHION', 'Sneakers', 79000, 'thum');
+    (53, 'FASHION', 'Sneakers', 79000, '/image/Sneakers.jpg');
 INSERT INTO PRODUCTS(amount, category, name, price, thumnail) VALUES
-    (8, 'ELECTRONIC', 'SmartWatch', 150000, 'thum');
+    (8, 'ELECTRONIC', 'SmartWatch', 150000, '/image/SmartWatch.jpg');
 
 
 INSERT INTO ROLES(name) VALUES ('ROLE_USER');

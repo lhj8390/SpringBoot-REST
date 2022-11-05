@@ -1,9 +1,8 @@
 import { FrownFilled } from "@ant-design/icons";
-import { Button, message, Result, Space, Table } from "antd";
+import { Button, Image, message, Result, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetAsync } from "../../actions/notification";
 import { deleteProductAsync, getProductListAsync } from "../../actions/product";
 import ProductEdit from "./ProductEdit";
 
@@ -49,6 +48,13 @@ const productList = () => {
     }
 
     const columes = [
+        {
+            title: 'Image',
+            key: 'thumnail',
+            render: (_, record) => (
+                <Image width={100} src={record.thumnail} />
+            )
+        },
         {
             title: 'Name',
             dataIndex: 'name',

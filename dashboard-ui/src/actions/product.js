@@ -34,6 +34,8 @@ export const deleteProductAsync = (id) => {
 	return async (dispatch) => {
 		apiInstance().delete(`/api/product/${id}/`)
 		.then(() => dispatch(deleteProductSuccess()))
-		.catch(e => dispatch(deleteProductFailed(e.response.data.data)));
+		.catch(e => {
+			dispatch(deleteProductFailed(e.response.data.data));
+		});
 	}
 }

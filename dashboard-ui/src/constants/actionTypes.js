@@ -9,7 +9,8 @@ export const DELETE_PRODUCT_FAILED = 'DELETE_PRODUCT_FAILED';
 
 
 // auth
-export const LOGIN_CHECK = 'LOGIN_CHECK';
+export const LOGIN_CHECK_SUCCESS = 'LOGIN_CHECK_SUCCESS';
+export const LOGIN_CHECK_FAILED = 'LOGIN_CHECK_FAILED';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
