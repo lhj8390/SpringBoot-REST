@@ -9,6 +9,9 @@ export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT = 'LOGOUT';
+export const JOIN = 'JOIN';
+export const JOIN_SUCCESS = 'JOIN_SUCCESS';
+export const JOIN_FAILED = 'JOIN_FAILED';
 
 // notification
-export const RESET_ERROR = 'RESET_ERROR';
+export const RESET = 'RESET';

@@ -3,7 +3,7 @@ import { Button, Form, Input, message } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync } from "../../actions/auth";
 import { useCookies } from 'react-cookie';
-import { resetErrorAsync } from "../../actions/notification";
+import { resetAsync } from "../../actions/notification";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
     useEffect(() => {
         if (error != null) {
             message.error(error);
-            dispatch(resetErrorAsync());
+            dispatch(resetAsync());
         }
     }, [error]);
 

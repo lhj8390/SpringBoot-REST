@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Layout, Row } from 'antd';
-import { LoginOutlined, LogoutOutlined } from '@ant-design/icons';
+import { LoginOutlined, LogoutOutlined, UserAddOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const { Header } = Layout;
@@ -22,6 +22,9 @@ const HeaderMenu = () => {
         else if (location.pathname.includes('/login')) {
             setPath('로그인');
         }
+        else if (location.pathname.includes('/join')) {
+            setPath('회원가입');
+        }
     }, [location.pathname])
 
 
@@ -33,11 +36,15 @@ const HeaderMenu = () => {
         navigate('/logout');
     }
 
+    const onJoinClick = () => {
+        navigate('/join');
+    }
+
     return (
         <Header style={{ background: '#fff'}}>
             <Row justify="end">
                 <Col flex='auto'><h2>{path}</h2></Col>
-                <Col flex='50px'>
+                <Col flex='200px' style={{ textAlign: 'right' }}>
                     { isAuthenticated ?
                         <Button
                             icon={<LogoutOutlined />}
@@ -46,12 +53,20 @@ const HeaderMenu = () => {
                             로그아웃
                         </Button>
                     :
-                        <Button
-                            icon={<LoginOutlined />}
-                            onClick={onLoginClick}
-                        >
-                            로그인
-                        </Button>
+                        <>
+                            <Button
+                                icon={<LoginOutlined />}
+                                onClick={onLoginClick}
+                            >
+                                로그인
+                            </Button>
+                            <Button
+                                icon={<UserAddOutlined />}
+                                onClick={onJoinClick}
+                            >
+                                회원가입
+                            </Button>
+                        </>
                     }
                 </Col>
             </Row>

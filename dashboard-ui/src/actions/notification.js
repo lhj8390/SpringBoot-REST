@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { RESET_ERROR } from '../constants/actionTypes';
+import { RESET } from '../constants/actionTypes';
 
-const resetError = createAction(RESET_ERROR);
+const reset = createAction(RESET);
 
-export const resetErrorAsync = () => {
-    return resetError();
+export const resetAsync = () => {
+    return reset();
 }
