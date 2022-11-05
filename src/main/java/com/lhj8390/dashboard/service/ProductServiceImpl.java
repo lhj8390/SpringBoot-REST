@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService{
         product.update(dto.getName(),
                         dto.getAmount(),
                         dto.getPrice(),
-                        ProductCategory.ELECTRONIC);
+                        ProductCategory.valueOf(dto.getCategory()));
     }
 
     @Override

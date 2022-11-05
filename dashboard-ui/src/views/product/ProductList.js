@@ -1,60 +1,74 @@
 import { FrownFilled } from "@ant-design/icons";
-import { Button, Result, Space, Table } from "antd";
+import { Button, message, Result, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getProductListAsync } from "../../actions/product";
-
-const columes = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Category',
-        dataIndex: 'category',
-        key: 'category',
-    },
-    {
-        title: 'Price',
-        dataIndex: 'price',
-        key: 'price',
-    },
-    {
-        title: 'Amount',
-        dataIndex: 'amount',
-        key: 'amount',
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (_) => (
-            <Space size='middle'>
-                <a>수정</a>
-                <a>삭제</a>
-            </Space>
-        )
-    },
-];
+import ProductEdit from "./ProductEdit";
 
 const productList = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { productList } = useSelector(state => state.product);
+    const { productList, isSuccess, error } = useSelector(state => state.product);
     const { isAuthenticated } = useSelector(state => state.auth);
+    const [ open, setOpen ] = useState(false);      // 모달 오픈 여부
+    const [ product, setProduct ] = useState({});   // 모달 내부의 상세 값
 
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(getProductListAsync());
         }
-
     }, [isAuthenticated]);
+
+    useEffect(() => {
+        if (error != null)
+            message.error(JSON.stringify(error));
+        if (isSuccess)
+            message.success('성공!');
+    }, [error, isSuccess]);
 
     const onLoginClick = () => {
         navigate('/login');
     }
+
+    const onEditClick = (id) => {
+        setProduct(productList.filter(p => p.id == id)[0]);
+        setOpen(true);
+    }
+
+    const columes = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Category',
+            dataIndex: 'category',
+            key: 'category',
+        },
+        {
+            title: 'Price',
+            dataIndex: 'price',
+            key: 'price',
+        },
+        {
+            title: 'Amount',
+            dataIndex: 'amount',
+            key: 'amount',
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size='middle'>
+                    <a onClick={() => onEditClick(record.id)}>수정</a>
+                    <a>삭제</a>
+                </Space>
+            )
+        },
+    ];
 
     return(
         <>
@@ -71,6 +85,7 @@ const productList = () => {
                     extra={<Button type='primary' onClick={onLoginClick}>로그인</Button>}
                 />
             }
+            { open && <ProductEdit open={open} setOpen={setOpen} product={product}/> }
         </>
     );
 };
