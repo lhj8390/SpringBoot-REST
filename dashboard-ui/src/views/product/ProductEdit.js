@@ -1,6 +1,6 @@
 import { Form, InputNumber, Input, Modal, Select, message } from "antd";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { resetAsync } from "../../actions/notification";
 import { getProductListAsync, modifyProductAsync } from "../../actions/product";
 
@@ -17,13 +17,11 @@ const ProductEdit = props => {
                 form.resetFields();
                 values.id = product.id;
                 dispatch(modifyProductAsync(values));
-                setOpen(false);
-                dispatch(getProductListAsync());
-                dispatch(resetAsync());
             })
             .catch((info) => {
                 console.log('Validate Failed:', info);
-            });
+            })
+            .finally(() => setOpen(false));
     };
 
     const closeModal = () => setOpen(false);

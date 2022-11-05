@@ -3,7 +3,8 @@ import { Button, message, Result, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getProductListAsync } from "../../actions/product";
+import { resetAsync } from "../../actions/notification";
+import { deleteProductAsync, getProductListAsync } from "../../actions/product";
 import ProductEdit from "./ProductEdit";
 
 const productList = () => {
@@ -22,11 +23,17 @@ const productList = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        if (error != null)
-            message.error(JSON.stringify(error));
-        if (isSuccess)
+        if (isSuccess) {
+            // 수정, 삭제가 성공할 때마다 갱신한다.
+            dispatch(getProductListAsync());
             message.success('성공!');
-    }, [error, isSuccess]);
+        }
+
+        if (error != null) {
+            message.error(JSON.stringify(error));
+        }
+
+    }, [isSuccess, error]);
 
     const onLoginClick = () => {
         navigate('/login');
@@ -35,6 +42,10 @@ const productList = () => {
     const onEditClick = (id) => {
         setProduct(productList.filter(p => p.id == id)[0]);
         setOpen(true);
+    }
+
+    const onDeleteClick = (id) => {
+        dispatch(deleteProductAsync(id));
     }
 
     const columes = [
@@ -64,7 +75,7 @@ const productList = () => {
             render: (_, record) => (
                 <Space size='middle'>
                     <a onClick={() => onEditClick(record.id)}>수정</a>
-                    <a>삭제</a>
+                    <a onClick={() => onDeleteClick(record.id)}>삭제</a>
                 </Space>
             )
         },
