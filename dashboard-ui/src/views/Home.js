@@ -29,7 +29,8 @@ const Home = () => {
         };
         orderList.map(order => {
             const orderDt = moment(order.orderDt);
-            if (moment(value).date() == (orderDt).date() &&
+            if (moment(value).year() == orderDt.year() &&
+                moment(value).date() == (orderDt).date() &&
                 moment(value).month() == orderDt.month()) {
                 listData.push({
                     type: colorMap[order.state],
@@ -46,7 +47,8 @@ const Home = () => {
 
         orderList.map(order => {
             const orderDt = moment(order.orderDt);
-            if (moment(value).month() == orderDt.month()) {
+            if (moment(value).year() == orderDt.year() &&
+                moment(value).month() == orderDt.month()) {
                 monthData.push(order);
             }
         });
