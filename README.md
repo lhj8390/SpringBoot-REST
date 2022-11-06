@@ -67,3 +67,25 @@ Swagger           |  http://localhost:8080/swagger-ui/index.html#/   |
 - password : `test1234`
 
 로그인 화면의 `test 계정` 버튼을 클릭하면 자동으로 입력됩니다.
+
+## 스크린샷
+#### Login
+![Dashboard](/screenshot/login.png?raw=true)
+---
+#### Join
+![Dashboard](/screenshot/join.png?raw=true)
+----
+#### Home
+![Dashboard](/screenshot/home.png?raw=true)
+---
+#### Home - 권한 없음
+![Dashboard](/screenshot/home_not_login.png?raw=true)
+---
+#### Product list
+![Dashboard](/screenshot/product_list.png?raw=true)
+---
+#### Product edit
+![Dashboard](/screenshot/product_edit.png?raw=true)
+---
+#### Order
+![Dashboard](/screenshot/order.png?raw=true)
