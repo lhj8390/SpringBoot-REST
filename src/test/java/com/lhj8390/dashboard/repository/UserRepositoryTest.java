@@ -23,7 +23,7 @@ public class UserRepositoryTest {
         String password = passwordEncoder.encode("test1234!");
 
         User user = User.builder()
-                .username("test")
+                .username("test2")
                 .email("email@email.com")
                 .password(password)
                 .build();
