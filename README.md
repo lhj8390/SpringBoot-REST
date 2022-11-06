@@ -10,6 +10,7 @@ Security          | Token Based (Spring Security and [JWT](https://github.com/au
 REST Documentation| [Swagger UI / Springfox](https://github.com/springfox/springfox)
 In Memory DB      | H2 
 Persistence       | JPA (Using Spring Data)
+UI Library        | [Ant Design](https://github.com/ant-design/ant-design)
 Test              | Junit, Mockito
 Client Build Tools| Webpack, npm
 Server Build Tools| Gradle
