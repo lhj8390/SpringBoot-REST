@@ -19,5 +19,9 @@ export const JOIN = 'JOIN';
 export const JOIN_SUCCESS = 'JOIN_SUCCESS';
 export const JOIN_FAILED = 'JOIN_FAILED';
 
+// order
+export const GET_ORDER_LIST_SUCCESS = 'GET_ORDER_LIST_SUCCESS';
+export const GET_ORDER_LIST_FAILED = 'GET_ORDER_LIST_FAILED';
+
 // notification
 export const RESET = 'RESET';

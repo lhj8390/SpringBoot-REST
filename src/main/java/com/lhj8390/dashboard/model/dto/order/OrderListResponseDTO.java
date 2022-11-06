@@ -5,10 +5,11 @@ import lombok.*;
 import java.util.Date;
 
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderListResponseDTO {
-    private Long OrderId;
+    private Long orderId;
     private String productName;
     private Date orderDt;
     private String state;

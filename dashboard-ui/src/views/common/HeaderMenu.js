@@ -13,20 +13,20 @@ const HeaderMenu = () => {
 
     useEffect(() => {
 
-        if (location.pathname == '/') {
-            setPath('home');
-        }
-        else if (location.pathname.includes('/product')) {
-            setPath('상품 리스트');
-        }
-        else if (location.pathname.includes('/login')) {
-            setPath('로그인');
-        }
-        else if (location.pathname.includes('/join')) {
-            setPath('회원가입');
-        }
+        setPath(findPath(location.pathname));
+
     }, [location.pathname])
 
+    const findPath = (path) => {
+        const pathColumn = {
+            "/" : "home",
+            "/product": "상품 리스트",
+            "/login": "로그인",
+            "/join": "회원가입",
+            "/order": "주문 내역"
+        };
+        return pathColumn[path] || '페이지 없음';
+    }
 
     const onLoginClick = () => {
         navigate('/login');

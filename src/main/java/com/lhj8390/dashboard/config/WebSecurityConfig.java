@@ -60,9 +60,18 @@ public class WebSecurityConfig implements WebSecurityCustomizer {
     public void customize(WebSecurity web) {
         web
                 .ignoring()
-                .antMatchers("/h2-console/**")
-                .antMatchers("/swagger-ui/**");
+                .antMatchers(AUTH_WHITELIST);
     }
+
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**",
+            "/h2-console/**",
+            "/swagger-ui/**",
+            "/image/**"
+    };
 
     @Bean
     public CustomUserDetailsService userDetailsService() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { AppstoreAddOutlined, HomeFilled } from '@ant-design/icons';
+import { AppstoreAddOutlined, HomeFilled, ShoppingCartOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 const { Sider } = Layout;
 
@@ -29,6 +29,11 @@ const SideMenu = () => {
                         key: '/product',
                         icon: <AppstoreAddOutlined />,
                         label: 'product'
+                    },
+                    {
+                        key: '/order',
+                        icon: <ShoppingCartOutlined />,
+                        label: 'order'
                     },
                 ]}
             >

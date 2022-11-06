@@ -34,18 +34,14 @@ const productList = () => {
 
     }, [isSuccess, error]);
 
-    const onLoginClick = () => {
-        navigate('/login');
-    }
+    const onLoginClick = () => navigate('/login');
 
     const onEditClick = (id) => {
         setProduct(productList.filter(p => p.id == id)[0]);
         setOpen(true);
     }
 
-    const onDeleteClick = (id) => {
-        dispatch(deleteProductAsync(id));
-    }
+    const onDeleteClick = (id) => dispatch(deleteProductAsync(id));
 
     const columes = [
         {

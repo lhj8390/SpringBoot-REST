@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { loginCheckAsync } from './actions/auth';
 import Join from './views/auth/join';
+import OrderList from './views/order/OrderList';
 const { Content, Footer } = Layout;
 
 const App = () => {
@@ -34,7 +35,8 @@ const App = () => {
 							<Route exact path='/' element={<Home/>}/>
 							<Route exact path='/login' element={<Login/>}/>
 							<Route exact path='/join' element={<Join/>}/>
-							<Route exact path='/logout' element={<Logout/>}/>
+							<Route exact path='/logout' element={<Logout />}/>
+							<Route exact path='/order' element={<OrderList />}/>
 							<Route exact path='/product' element={<ProductList/>}/>
 						</Routes>
 					</div>

@@ -28,4 +28,4 @@ spring:
 
 app:
   jwtSecret: secret
-  jwtExpiration: 3600000
+  jwtExpiration: 86400000

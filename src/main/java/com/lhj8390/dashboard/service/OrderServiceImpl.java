@@ -17,6 +17,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +32,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public Page<OrderListResponseDTO> getOrderList(Pageable pageable) {
         Page<Order> orderList = orderRepository.findAll(pageable);
+        List<OrderListResponseDTO> responseDTOList = orderList.getContent()
+                .stream().map(orderMapper::toDto).collect(Collectors.toList());
+
         return new PageImpl<>(
-                orderMapper.toListDto(orderList.getContent()), pageable, orderList.getTotalElements()
+                responseDTOList, pageable, orderList.getTotalElements()
         );
     }
 
